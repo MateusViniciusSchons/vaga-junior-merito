@@ -22,7 +22,7 @@ public class TipoCombustivelDAO {
     }
     
     public List<TipoCombustivel> listarTodos() {
-    	String sql = "SELECT * FROM tipos_combustivel;";
+    	String sql = "SELECT * FROM tipos_combustivel WHERE deletado = false;";
     	return jdbc.query(sql, (rs, rowNum) -> {
     		TipoCombustivel tc = new TipoCombustivel();
     		tc.setId(rs.getInt("id"));
