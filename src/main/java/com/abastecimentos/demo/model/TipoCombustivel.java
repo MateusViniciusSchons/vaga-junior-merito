@@ -1,17 +1,17 @@
 package com.abastecimentos.demo.model;
 
-public class TipoAbastecimento {
+public class TipoCombustivel {
 	private int id;
     private String nome;
     private Double precoLitro;
     private Boolean deletado;
     
-    public TipoAbastecimento(String nome, Double precoLitro) {
+    public TipoCombustivel(String nome, Double precoLitro) {
     	this.nome = nome;
     	this.precoLitro = precoLitro;
     }
     
-    public TipoAbastecimento() {
+    public TipoCombustivel() {
     	
     }
     
