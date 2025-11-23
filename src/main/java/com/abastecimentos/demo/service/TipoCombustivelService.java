@@ -25,7 +25,23 @@ public class TipoCombustivelService {
 	
 	public List<TipoCombustivelResponseDTO> listarTodos() {
 		
-		return dao.listarTodos().stream().map(ta -> new TipoCombustivelResponseDTO(ta.getId(), ta.getNome(), ta.getPrecoLitro())).toList();
+		return dao.listarTodos().stream().map(tc -> new TipoCombustivelResponseDTO(tc.getId(), tc.getNome(), tc.getPrecoLitro())).toList();
+		
+	}
+	
+	public TipoCombustivelResponseDTO alterar(Integer id, TipoCombustivelCriarDTO dto) {
+		
+		TipoCombustivel existe = dao.buscarPorId(id);
+		if(existe == null) {
+			throw new RuntimeException("Tipo de combustível não encontrado.");
+		}
+		
+		existe.setNome(dto.nome());
+		existe.setPrecoLitro(dto.precoLitro());
+		
+		dao.alterar(existe);
+		
+		return new TipoCombustivelResponseDTO(existe.getId(), existe.getNome(), existe.getPrecoLitro());
 		
 	}
 }

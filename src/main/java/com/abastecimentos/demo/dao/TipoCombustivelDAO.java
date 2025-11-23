@@ -33,4 +33,14 @@ public class TipoCombustivelDAO {
     		return tc;
     	});
     }
+    
+    public TipoCombustivel buscarPorId(Integer id) {
+    	String sql = "SELECT * FROM tipos_combustivel WHERE id = ?;";
+    	return jdbc.query(sql, rs -> rs.next()? new TipoCombustivel(rs.getInt("id"), rs.getString("nome"), rs.getDouble("preco_litro"), rs.getBoolean("deletado")) : null, id);
+    }
+    
+    public void alterar(TipoCombustivel tc) {
+    	String sql = "UPDATE tipos_combustivel SET nome = ?, preco_litro = ? WHERE id = ?;";
+    	jdbc.update(sql, tc.getNome(), tc.getPrecoLitro(), tc.getId());
+    }
 }

@@ -11,6 +11,13 @@ public class TipoCombustivel {
     	this.precoLitro = precoLitro;
     }
     
+    public TipoCombustivel(Integer id, String nome, Double precoLitro, Boolean deletado) {
+    	this.id = id;
+    	this.nome = nome;
+    	this.precoLitro = precoLitro;
+    	this.deletado = deletado;
+    }
+    
     public TipoCombustivel() {
     	
     }
