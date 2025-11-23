@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.abastecimentos.demo.dto.BombaCombustivelCriarDTO;
-import com.abastecimentos.demo.dto.BombaCombustivelResponseDTO2;
+import com.abastecimentos.demo.dto.BombaCombustivelResponseDTO;
 import com.abastecimentos.demo.dto.TipoCombustivelCriarDTO;
 import com.abastecimentos.demo.dto.TipoCombustivelResponseDTO;
 import com.abastecimentos.demo.model.TipoCombustivel;
@@ -32,7 +32,7 @@ public class BombaCombustivelController {
 	@PostMapping("/bombas-combustivel")
     public ResponseEntity<?> criar(@RequestBody BombaCombustivelCriarDTO dto) {
     	try {
-    		BombaCombustivelResponseDTO2 bombaCombustivel =  service.criar(dto);
+    		BombaCombustivelResponseDTO bombaCombustivel =  service.criar(dto);
     		
     		
     		return ResponseEntity.status(201).body(bombaCombustivel);

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import com.abastecimentos.demo.dao.BombaCombustivelDAO;
 import com.abastecimentos.demo.dao.TipoCombustivelDAO;
 import com.abastecimentos.demo.dto.BombaCombustivelCriarDTO;
-import com.abastecimentos.demo.dto.BombaCombustivelResponseDTO2;
+import com.abastecimentos.demo.dto.BombaCombustivelResponseDTO;
 import com.abastecimentos.demo.dto.TipoCombustivelCriarDTO;
 import com.abastecimentos.demo.dto.TipoCombustivelResponseDTO;
 import com.abastecimentos.demo.model.BombaCombustivel;
@@ -23,7 +23,7 @@ public class BombaCombustivelService {
 		this.tcDao = tcDao;
 	}
 	
-	public BombaCombustivelResponseDTO2 criar(BombaCombustivelCriarDTO dto) {
+	public BombaCombustivelResponseDTO criar(BombaCombustivelCriarDTO dto) {
 		TipoCombustivel tc = tcDao.buscarPorId(dto.tipoCombustivelId());
 		if(tc == null) {
 			throw new RuntimeException("Tipo de Combustível não encontrado.");
@@ -32,7 +32,7 @@ public class BombaCombustivelService {
 		BombaCombustivel bc = new BombaCombustivel(dto.nome(), tc);
 		
 		Integer idCriado = dao.criar(bc);
-		return new BombaCombustivelResponseDTO2(idCriado, dto.nome(), new TipoCombustivelResponseDTO(tc.getId(), tc.getNome(), tc.getPrecoLitro()));
+		return new BombaCombustivelResponseDTO(idCriado, dto.nome(), new TipoCombustivelResponseDTO(tc.getId(), tc.getNome(), tc.getPrecoLitro()));
 	}
 	
 	
