@@ -101,4 +101,16 @@ public class AbastecimentoService {
 		
 	}
 	
+	public void deletar(Integer id) {
+		
+		Abastecimento existe = dao.buscarPorId(id);
+		if(existe == null) {
+			throw new RuntimeException("Abastecimento não encontrado.");
+		}
+		
+		
+		dao.deletar(id);
+		
+	}
+	
 }

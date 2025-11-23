@@ -51,5 +51,10 @@ public class AbastecimentoDAO {
 		 	jdbc.update(sql, a.getBombaCombustivel().getId(), a.getData(), a.getValorTotal(), a.getLitros(), a.getId());
 	 }
 	 
+	 public void deletar(Integer id) {
+	    	String sql = "UPDATE abastecimentos SET deletado = ? WHERE id = ?;";
+	    	jdbc.update(sql, true, id);
+	    }
+	 
 	 
 }
