@@ -56,4 +56,17 @@ public class AbastecimentoController {
     	}
     }
 	
+	@PutMapping("/abastecimentos/{id}")
+    public ResponseEntity<?> alterar(@PathVariable Integer id, @RequestBody  AbastecimentoCriarDTO dto) {
+		
+    	try {
+    		AbastecimentoResponseDTO abastecimento =  service.alterar(id, dto);
+    		
+    		
+    		return ResponseEntity.status(200).body(abastecimento);
+    	} catch(Exception e) {
+    		return ResponseEntity.badRequest().body(Map.of("erro", e.getMessage()));
+    	}
+    }
+	
 }

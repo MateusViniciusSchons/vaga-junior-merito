@@ -75,7 +75,30 @@ public class AbastecimentoService {
 		
 	}
 	
-
 	
+	public AbastecimentoResponseDTO alterar(Integer id, AbastecimentoCriarDTO dto) {
+		
+		Abastecimento existeAbastecimento = dao.buscarPorId(id);
+		if(existeAbastecimento == null) {
+			throw new RuntimeException("Abastecimento não encontrado.");
+		}
+		
+		BombaCombustivel existeBomba = bcDao.buscarPorId(dto.bombaCombustivelId());
+		if(existeBomba == null) {
+			throw new RuntimeException("Bomba de Combustível não encontrada.");
+		}
+		
+		Double valorTotal = existeBomba.getTipoCombustivel().getPrecoLitro() * dto.litros();
+		
+		existeAbastecimento.setData(dto.data());
+		existeAbastecimento.setBombaCombustivel(existeBomba);
+		existeAbastecimento.setLitros(dto.litros());
+		existeAbastecimento.setValorTotal(valorTotal);
+		
+		dao.alterar(existeAbastecimento);
+		
+		return new AbastecimentoResponseDTO(existeAbastecimento.getId(), new BombaCombustivelResponseDTO(existeBomba.getId(), existeBomba.getNome(), new TipoCombustivelResponseDTO(existeBomba.getTipoCombustivel().getId(), existeBomba.getTipoCombustivel().getNome(), existeBomba.getTipoCombustivel().getPrecoLitro())), existeAbastecimento.getData(), valorTotal, existeAbastecimento.getLitros());
+		
+	}
 	
 }
