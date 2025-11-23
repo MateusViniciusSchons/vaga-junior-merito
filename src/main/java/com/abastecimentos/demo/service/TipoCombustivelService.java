@@ -44,4 +44,16 @@ public class TipoCombustivelService {
 		return new TipoCombustivelResponseDTO(existe.getId(), existe.getNome(), existe.getPrecoLitro());
 		
 	}
+	
+public void deletar(Integer id) {
+		
+		TipoCombustivel existe = dao.buscarPorId(id);
+		if(existe == null) {
+			throw new RuntimeException("Tipo de combustível não encontrado.");
+		}
+		
+		
+		dao.deletar(id);
+		
+	}
 }

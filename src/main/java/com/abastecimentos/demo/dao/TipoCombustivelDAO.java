@@ -43,4 +43,9 @@ public class TipoCombustivelDAO {
     	String sql = "UPDATE tipos_combustivel SET nome = ?, preco_litro = ? WHERE id = ?;";
     	jdbc.update(sql, tc.getNome(), tc.getPrecoLitro(), tc.getId());
     }
+    
+    public void deletar(Integer id) {
+    	String sql = "UPDATE tipos_combustivel SET deletado = ? WHERE id = ?;";
+    	jdbc.update(sql, true, id);
+    }
 }
