@@ -53,4 +53,17 @@ public class BombaCombustivelController {
     	}
     }
 	
+	@PutMapping("/bombas-combustivel/{id}")
+    public ResponseEntity<?> alterar(@PathVariable Integer id, @RequestBody  BombaCombustivelCriarDTO dto) {
+		
+    	try {
+    		BombaCombustivelResponseDTO bombaCombustivel =  service.alterar(id, dto);
+    		
+    		
+    		return ResponseEntity.status(200).body(bombaCombustivel);
+    	} catch(Exception e) {
+    		return ResponseEntity.badRequest().body(Map.of("erro", e.getMessage()));
+    	}
+    }
+	
 }

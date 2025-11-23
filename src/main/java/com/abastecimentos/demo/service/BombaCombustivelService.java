@@ -42,5 +42,26 @@ public class BombaCombustivelService {
 		
 	}
 	
+	public BombaCombustivelResponseDTO alterar(Integer id, BombaCombustivelCriarDTO dto) {
+		
+		BombaCombustivel existeBomba = dao.buscarPorId(id);
+		if(existeBomba == null) {
+			throw new RuntimeException("Bomba de combustível não encontrada.");
+		}
+		
+		TipoCombustivel existeTipo = tcDao.buscarPorId(dto.tipoCombustivelId());
+		if(existeTipo == null) {
+			throw new RuntimeException("Tipo de Combustível não encontrado.");
+		}
+		
+		existeBomba.setNome(dto.nome());
+		existeBomba.setTipoCombustivel(existeTipo);
+		
+		dao.alterar(existeBomba);
+		
+		return new BombaCombustivelResponseDTO(existeBomba.getId(), existeBomba.getNome(), new TipoCombustivelResponseDTO(existeTipo.getId(), existeTipo.getNome(), existeTipo.getPrecoLitro()));
+		
+	}
+	
 	
 }
