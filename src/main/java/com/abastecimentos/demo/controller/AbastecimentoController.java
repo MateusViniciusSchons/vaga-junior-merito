@@ -44,4 +44,16 @@ public class AbastecimentoController {
     	}
     }
 	
+	@GetMapping("/abastecimentos")
+    public ResponseEntity<?> listarTodos() {
+    	try {
+    		List<AbastecimentoResponseDTO> abastecimentos=  service.listarTodos();
+    		
+    		
+    		return ResponseEntity.status(200).body(abastecimentos);
+    	} catch(Exception e) {
+    		return ResponseEntity.badRequest().body(Map.of("erro", e.getMessage()));
+    	}
+    }
+	
 }

@@ -55,6 +55,26 @@ public class AbastecimentoService {
 		);
 	}
 	
+	public List<AbastecimentoResponseDTO> listarTodos() {
+		
+		return dao.listarTodos().stream().map(a -> new AbastecimentoResponseDTO(
+				a.getId(), 
+				new BombaCombustivelResponseDTO(
+						a.getBombaCombustivel().getId(), 
+						a.getBombaCombustivel().getNome(), 
+						new TipoCombustivelResponseDTO(
+								a.getBombaCombustivel().getTipoCombustivel().getId(), 
+								a.getBombaCombustivel().getTipoCombustivel().getNome(), 
+								a.getBombaCombustivel().getTipoCombustivel().getPrecoLitro()
+						)
+				),
+				a.getData(), 
+				a.getValorTotal(), 
+				a.getLitros()
+		)).toList();
+		
+	}
+	
 
 	
 	
