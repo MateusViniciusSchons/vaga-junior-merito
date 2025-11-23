@@ -22,6 +22,18 @@ public class BombaCombustivelDAO {
         return jdbc.queryForObject(sql, Integer.class, bc.getNome(), bc.getTipoCombustivel().getId());
     }
 	 
+	 public List<BombaCombustivel> listarTodos() {
+    	String sql = "SELECT tc.id as tc_id, tc.nome as tc_nome, tc.preco_litro as tc_preco_litro, tc.deletado as tc_deletado, bc.id as bc_id, bc.nome as bc_nome, bc.tipo_combustivel as bc_tipo_combustivel, bc.deletado as bc_deletado FROM bombas_combustivel bc JOIN tipos_combustivel tc ON tc.id = bc.tipo_combustivel WHERE bc.deletado = false;";
+    	return jdbc.query(sql, (rs, rowNum) -> {
+    		BombaCombustivel bc = new BombaCombustivel();
+    		bc.setId(rs.getInt("bc_id"));
+    		bc.setNome(rs.getString("bc_nome"));
+    		bc.setTipoCombustivel(new TipoCombustivel(rs.getInt("tc_id"), rs.getString("tc_nome"), rs.getDouble("tc_preco_litro"), rs.getBoolean("tc_deletado")));
+    		bc.setDeletado(rs.getBoolean("bc_deletado"));
+    		
+    		return bc;
+    	});
+    }
     
     
 }

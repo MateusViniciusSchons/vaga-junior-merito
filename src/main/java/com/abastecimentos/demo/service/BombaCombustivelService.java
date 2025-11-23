@@ -35,5 +35,12 @@ public class BombaCombustivelService {
 		return new BombaCombustivelResponseDTO(idCriado, dto.nome(), new TipoCombustivelResponseDTO(tc.getId(), tc.getNome(), tc.getPrecoLitro()));
 	}
 	
+
+	public List<BombaCombustivelResponseDTO> listarTodos() {
+		
+		return dao.listarTodos().stream().map(bc -> new BombaCombustivelResponseDTO(bc.getId(), bc.getNome(), new TipoCombustivelResponseDTO(bc.getTipoCombustivel().getId(), bc.getTipoCombustivel().getNome(), bc.getTipoCombustivel().getPrecoLitro()))).toList();
+		
+	}
+	
 	
 }

@@ -41,4 +41,16 @@ public class BombaCombustivelController {
     	}
     }
 	
+	@GetMapping("/bombas-combustivel")
+    public ResponseEntity<?> listarTodos() {
+    	try {
+    		List<BombaCombustivelResponseDTO> bombasCombustivel =  service.listarTodos();
+    		
+    		
+    		return ResponseEntity.status(200).body(bombasCombustivel);
+    	} catch(Exception e) {
+    		return ResponseEntity.badRequest().body(Map.of("erro", e.getMessage()));
+    	}
+    }
+	
 }
