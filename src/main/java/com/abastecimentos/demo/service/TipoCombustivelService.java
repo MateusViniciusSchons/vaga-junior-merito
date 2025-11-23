@@ -45,7 +45,7 @@ public class TipoCombustivelService {
 		
 	}
 	
-public void deletar(Integer id) {
+	public void deletar(Integer id) {
 		
 		TipoCombustivel existe = dao.buscarPorId(id);
 		if(existe == null) {
