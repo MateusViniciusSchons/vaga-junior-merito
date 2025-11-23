@@ -63,5 +63,17 @@ public class BombaCombustivelService {
 		
 	}
 	
+	public void deletar(Integer id) {
+		
+		BombaCombustivel existe = dao.buscarPorId(id);
+		if(existe == null) {
+			throw new RuntimeException("Bomba de combustível não encontrada.");
+		}
+		
+		
+		dao.deletar(id);
+		
+	}
+	
 	
 }

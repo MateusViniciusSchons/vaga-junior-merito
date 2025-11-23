@@ -45,5 +45,9 @@ public class BombaCombustivelDAO {
     	jdbc.update(sql, tc.getNome(), tc.getTipoCombustivel().getId(), tc.getId());
     }
     
+    public void deletar(Integer id) {
+    	String sql = "UPDATE bombas_combustivel SET deletado = ? WHERE id = ?;";
+    	jdbc.update(sql, true, id);
+    }
     
 }

@@ -66,4 +66,17 @@ public class BombaCombustivelController {
     	}
     }
 	
+	@DeleteMapping("/bombas-combustivel/{id}")
+    public ResponseEntity<?> deletar(@PathVariable Integer id) {
+		
+    	try {
+    		service.deletar(id);
+    		
+    		
+    		return ResponseEntity.noContent().build();
+    	} catch(Exception e) {
+    		return ResponseEntity.badRequest().body(Map.of("erro", e.getMessage()));
+    	}
+    }
+	
 }
