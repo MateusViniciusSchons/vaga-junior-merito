@@ -17,6 +17,8 @@ import com.abastecimentos.demo.dto.TipoCombustivelResponseDTO;
 import com.abastecimentos.demo.model.TipoCombustivel;
 import com.abastecimentos.demo.service.TipoCombustivelService;
 
+import jakarta.validation.Valid;
+
 @RestController
 public class TipoCombustivelController {
 	
@@ -27,7 +29,7 @@ public class TipoCombustivelController {
 	}
 	
 	@PostMapping("/tipos-combustivel")
-    public ResponseEntity<?> criar(@RequestBody TipoCombustivelCriarDTO dto) {
+    public ResponseEntity<?> criar(@Valid @RequestBody TipoCombustivelCriarDTO dto) {
     	try {
     		TipoCombustivelResponseDTO tipoCombustivel =  service.criar(dto);
     		
@@ -51,7 +53,7 @@ public class TipoCombustivelController {
     }
 	
 	@PutMapping("/tipos-combustivel/{id}")
-    public ResponseEntity<?> alterar(@PathVariable Integer id, @RequestBody  TipoCombustivelCriarDTO dto) {
+    public ResponseEntity<?> alterar(@PathVariable Integer id, @Valid @RequestBody  TipoCombustivelCriarDTO dto) {
 		
     	try {
     		TipoCombustivelResponseDTO tipoCombustivel =  service.alterar(id, dto);

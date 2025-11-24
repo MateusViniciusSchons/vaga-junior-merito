@@ -20,6 +20,8 @@ import com.abastecimentos.demo.model.TipoCombustivel;
 import com.abastecimentos.demo.service.BombaCombustivelService;
 import com.abastecimentos.demo.service.TipoCombustivelService;
 
+import jakarta.validation.Valid;
+
 @RestController
 public class BombaCombustivelController {
 	
@@ -30,7 +32,7 @@ public class BombaCombustivelController {
 	}
 	
 	@PostMapping("/bombas-combustivel")
-    public ResponseEntity<?> criar(@RequestBody BombaCombustivelCriarDTO dto) {
+    public ResponseEntity<?> criar(@Valid @RequestBody BombaCombustivelCriarDTO dto) {
     	try {
     		BombaCombustivelResponseDTO bombaCombustivel =  service.criar(dto);
     		
@@ -54,7 +56,7 @@ public class BombaCombustivelController {
     }
 	
 	@PutMapping("/bombas-combustivel/{id}")
-    public ResponseEntity<?> alterar(@PathVariable Integer id, @RequestBody  BombaCombustivelCriarDTO dto) {
+    public ResponseEntity<?> alterar(@PathVariable Integer id, @Valid @RequestBody  BombaCombustivelCriarDTO dto) {
 		
     	try {
     		BombaCombustivelResponseDTO bombaCombustivel =  service.alterar(id, dto);

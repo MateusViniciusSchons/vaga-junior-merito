@@ -23,6 +23,8 @@ import com.abastecimentos.demo.service.AbastecimentoService;
 import com.abastecimentos.demo.service.BombaCombustivelService;
 import com.abastecimentos.demo.service.TipoCombustivelService;
 
+import jakarta.validation.Valid;
+
 @RestController
 public class AbastecimentoController {
 	
@@ -33,7 +35,7 @@ public class AbastecimentoController {
 	}
 	
 	@PostMapping("/abastecimentos")
-    public ResponseEntity<?> criar(@RequestBody AbastecimentoCriarDTO dto) {
+    public ResponseEntity<?> criar(@Valid @RequestBody AbastecimentoCriarDTO dto) {
     	try {
     		AbastecimentoResponseDTO abastecimento=  service.criar(dto);
     		
@@ -57,7 +59,7 @@ public class AbastecimentoController {
     }
 	
 	@PutMapping("/abastecimentos/{id}")
-    public ResponseEntity<?> alterar(@PathVariable Integer id, @RequestBody  AbastecimentoCriarDTO dto) {
+    public ResponseEntity<?> alterar(@PathVariable Integer id, @Valid @RequestBody  AbastecimentoCriarDTO dto) {
 		
     	try {
     		AbastecimentoResponseDTO abastecimento =  service.alterar(id, dto);
