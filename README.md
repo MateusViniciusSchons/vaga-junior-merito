@@ -57,6 +57,43 @@ Esse projeto faz parte de um desafio criado para uma vaga de Desenvolvedor Júni
   spring.datasource.driver-class-name=org.postgresql.Driver
 ```
 2. Crie o banco de dados e as tabelas:
+   
+```
+	CREATE TABLE tipos_combustivel (
+	id SERIAL PRIMARY KEY,
+	nome VARCHAR(255) NOT NULL,
+	preco_litro NUMERIC(10, 3),
+	deletado BOOLEAN DEFAULT false
+	);
+```
+
+```
+	CREATE TABLE bombas_combustivel (
+	id SERIAL PRIMARY KEY,
+	nome VARCHAR(100) NOT NULL,
+	tipo_combustivel INTEGER NOT NULL,
+	deletado BOOLEAN DEFAULT false,
+	CONSTRAINT fk_bomba_tipo_combustivel
+	FOREIGN KEY (tipo_combustivel)
+	REFERENCES tipos_combustivel(id)
+	ON DELETE RESTRICT
+	);
+```
+
+```
+	CREATE TABLE abastecimentos (
+	id SERIAL PRIMARY KEY,
+	bomba_combustivel INTEGER NOT NULL,
+	CONSTRAINT fk_abastecimento_bomba_combustivel
+	FOREIGN KEY (bomba_combustivel)
+	REFERENCES bombas_combustivel(id)
+	ON DELETE RESTRICT,
+	data DATE DEFAULT CURRENT_DATE,
+	litros NUMERIC(10, 3) NOT NULL,
+	valor_total NUMERIC(10, 2) NOT NULL,
+	deletado BOOLEAN DEFAULT false
+	);
+```
 3. Rode o projeto com ``mvn spring-boot:run``
 4. A aplicação estará disponível em ``http://localhost:8080``
 
@@ -108,5 +145,7 @@ DELETE /abastecimentos/{id}
 	"litros": 10
 }
 ```
+
+---
 ## 🔥 Aprendizados
 - Neste projeto perdi o medo de usar Spring Boot e Spring Web. Apesar de nunca tê-los usado antes, consegui aprender e fazer um projeto bem completo (ao meu ver) utilizando conceitos que aprendi com outras tecnologias. Ao longo do projeto tive um desafio enorme ao utilizar pela primeira vez o ZorinOS para desenvolver, o que me custou algumas horas para "pegar o jeito" do SO.
