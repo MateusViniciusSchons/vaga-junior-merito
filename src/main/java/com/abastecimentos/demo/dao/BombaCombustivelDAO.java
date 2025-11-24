@@ -36,7 +36,7 @@ public class BombaCombustivelDAO {
     }
 	 
 	 public BombaCombustivel buscarPorId(Integer id) {
-	    	String sql = "SELECT tc.id as tc_id, tc.nome as tc_nome, tc.preco_litro as tc_preco_litro, tc.deletado as tc_deletado, bc.id as bc_id, bc.nome as bc_nome, bc.tipo_combustivel as bc_tipo_combustivel, bc.deletado as bc_deletado FROM bombas_combustivel bc JOIN tipos_combustivel tc ON tc.id = bc.tipo_combustivel WHERE bc.id = ?;";
+	    	String sql = "SELECT tc.id as tc_id, tc.nome as tc_nome, tc.preco_litro as tc_preco_litro, tc.deletado as tc_deletado, bc.id as bc_id, bc.nome as bc_nome, bc.tipo_combustivel as bc_tipo_combustivel, bc.deletado as bc_deletado FROM bombas_combustivel bc JOIN tipos_combustivel tc ON tc.id = bc.tipo_combustivel WHERE bc.id = ? AND bc.deletado = false;";
 	    	return jdbc.query(sql, rs -> rs.next()? new BombaCombustivel(rs.getInt("bc_id"), rs.getString("bc_nome"), new TipoCombustivel(rs.getInt("tc_id"), rs.getString("tc_nome"), rs.getDouble("tc_preco_litro"), rs.getBoolean("tc_deletado")), rs.getBoolean("bc_deletado")) : null, id);
     }
     

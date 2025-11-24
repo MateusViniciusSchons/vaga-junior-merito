@@ -35,7 +35,7 @@ public class TipoCombustivelDAO {
     }
     
     public TipoCombustivel buscarPorId(Integer id) {
-    	String sql = "SELECT * FROM tipos_combustivel WHERE id = ?;";
+    	String sql = "SELECT * FROM tipos_combustivel WHERE id = ? AND deletado = false;";
     	return jdbc.query(sql, rs -> rs.next()? new TipoCombustivel(rs.getInt("id"), rs.getString("nome"), rs.getDouble("preco_litro"), rs.getBoolean("deletado")) : null, id);
     }
     
